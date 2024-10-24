@@ -41,12 +41,10 @@ class ModeloAreasSociales {
     INGRESAR ÁREA SOCIAL
     =============================================*/
     static public function mdlIngresarAreaSocial($tabla, $datos) {
-      $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(descripcion, precio, fecha, estado) VALUES (:descripcion, :precio, :fecha, :estado)");
+      $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(descripcion, precio) VALUES (:descripcion, :precio)");
 
       $stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
       $stmt->bindParam(":precio", $datos["precio"], PDO::PARAM_STR);
-      $stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
-      $stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_INT);
 
       if ($stmt->execute()) {
           return "ok";

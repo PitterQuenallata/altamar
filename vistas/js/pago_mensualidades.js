@@ -34,11 +34,21 @@ $(document).ready(function() {
     }
   });
 
-  // Imprimir Pago
-  $(".btnImprimirPago").on("click", function() {
-    var idPago = $(this).attr("idPago");
+  // // Imprimir Pago
+  // $(".btnImprimirPago").on("click", function() {
+  //   var idPago = $(this).attr("idPago");
 
-    // Redirigir a la página de impresión (aquí se asume que tienes una página o método para generar la impresión)
-    window.open("extensiones/TCPDF-main/pdf/recibo.php?codigo=" + idPago, "_blank");
-  });
+  //   // Redirigir a la página de impresión (aquí se asume que tienes una página o método para generar la impresión)
+  //   window.open("extensiones/TCPDF-main/pdf/recibo.php?codigo=" + idPago, "_blank");
+  // });
+
+
+
+   // Evento para actualizar el monto cuando se seleccione un periodo de mensualidad
+ // Evento para mostrar el ID del propietario seleccionado
+  $('select[name="idPropietario"]').on('change', function() {
+  var idPropietario = $(this).val(); // Obtener el ID del propietario seleccionado
+  console.log("ID del propietario seleccionado: " + idPropietario); // Mostrar el ID en la consola
+  
+});
 });

@@ -18,7 +18,6 @@
 
   <!-- Main content -->
   <section class="content">
-
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
@@ -37,44 +36,21 @@
       </div>
 
       <div class="card-body">
-        <table id="pagosMensuales" class="table table-bordered table-hover table-striped">
+        <table id="pagosMensuales" class="table table-sm table-hover table-striped">
           <thead>
             <tr>
               <th style="width:10px">#</th>
               <th>Nombre del Propietario</th>
-              <th>Apellido</th>
               <th>Carnet</th>
-              <th>Teléfono</th>
+              <th>Periodo</th>
               <th>Monto</th>
-              <th>Estado</th>
               <th>Fecha</th>
-              <th>Usuario que Registró</th>
               <th>Acciones</th>
             </tr> 
           </thead>
           <tbody>
             <?php
-            $item = null;
-            $valor = null;
-
-            $pagos = ControladorPagoMensualidades::ctrMostrarPagosMensualidades($item, $valor);
-
-            foreach ($pagos as $key => $value) {
-              echo '<tr>
-                      <td>'.($key+1).'</td>
-                      <td>'.$value["nombre_propietario"].'</td>
-                      <td>'.$value["apellido_propietario"].'</td>
-                      <td>'.$value["nroCarnet"].'</td>
-                      <td>'.$value["telefono"].'</td>
-                      <td>'.$value["monto"].'</td>
-                      <td>'.($value["estado"] == 1 ? "Pagado" : "No Pagado").'</td>
-                      <td>'.$value["fecha"].'</td>
-                      <td>'.$value["nombre_usuario"].'</td>
-                      <td>
-                        <button class="btn btn-info btnImprimirPago" idPago="'.$value["id"].'"><i class="fa fa-print"></i></button>
-                      </td>
-                    </tr>';
-            }
+            // Llamada al controlador para mostrar los pagos de mensualidades
             ?>
           </tbody>
         </table>
@@ -118,7 +94,7 @@ MODAL AGREGAR PAGO
                 <?php
                 $propietarios = ControladorPropietarios::ctrMostrarPropietarios(null, null);
                 foreach ($propietarios as $propietario) {
-                  echo '<option value="'.$propietario["id"].'">'.$propietario["nombre"].' '.$propietario["apellido"].'</option>';
+                  echo '<option value="'.$propietario["id"].'">'.$propietario["nombre"].' '.$propietario["apellido_paterno"].' '.$propietario["apellido_materno"].'</option>';
                 }
                 ?>
               </select>
@@ -126,24 +102,51 @@ MODAL AGREGAR PAGO
           </div>
 
           <div class="form-group">
-            <!-- Entrada para el monto -->
+            <!-- Selección del mensualidad -->
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-money-bill"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="nuevoMonto" placeholder="Ingresar monto" required>
+              <select class="form-control input-lg" name="idMensualidad" required>
+                <option value="">Seleccionar periodo</option>
+                <?php
+                // Generar periodo en base a las deudas del propietario
+                ?>
+              </select>
             </div>
           </div>
 
           <div class="form-group">
-            <!-- Entrada para la fecha -->
+            <!-- Entrada para el monto en base al periodo seleccionado -->
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                <span class="input-group-text"><i class="fa fa-money-bill"></i></span>
               </div>
-              <input type="date" class="form-control input-lg" name="nuevaFecha" placeholder="Ingresar fecha" required>
+              <input type="number" class="form-control input-lg" name="montoPeriodo" placeholder="Monto del periodo" required readonly>
             </div>
           </div>
+
+          <div class="form-group">
+            <!-- Monto dado del cliente -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-money-bill"></i></span>
+              </div>
+              <input type="number" class="form-control input-lg" name="montoRecibido" placeholder="Monto recibido" required onchange="validateJS(event, 'decimal')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <!-- Monto de cambio o vuelto para el cliente -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-money-bill"></i></span>
+              </div>
+              <input type="number" class="form-control input-lg" name="montoCambio" placeholder="Monto de cambio" required readonly>
+            </div>
+          </div>
+
         </div>
 
         <!-- Pie del modal -->
@@ -154,7 +157,7 @@ MODAL AGREGAR PAGO
 
         <?php
           // Llamada al controlador para agregar un nuevo pago de mensualidad
-          if (isset($_POST['nuevoMonto'])) {
+          if (isset($_POST['montoRecibido'])) {
               $crearPago = new ControladorPagoMensualidades();
               $crearPago->ctrCrearPagoMensualidad();
           }
@@ -163,4 +166,3 @@ MODAL AGREGAR PAGO
     </div>
   </div>
 </div>
-

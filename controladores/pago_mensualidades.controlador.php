@@ -15,7 +15,7 @@ class ControladorPagoMensualidades {
               preg_match('/^[0-9]+$/', $_POST["idPropietario"]) &&
               preg_match('/^[0-9]+$/', $_POST["idUsuarioRegistro"])) {
 
-              $tabla = "pago_mensualidades";
+              $tabla = "pago_mensualidad";
 
               $datos = array(
                   "monto" => $_POST["nuevoMonto"],
@@ -75,7 +75,7 @@ class ControladorPagoMensualidades {
   MOSTRAR PAGOS MENSUALIDADES
   =============================================*/
   static public function ctrMostrarPagosMensualidades($item, $valor) {
-      $tabla = "pago_mensualidades";
+      $tabla = "pago_mensualidad";
       $respuesta = ModeloPagoMensualidades::mdlMostrarPagosMensualidades($tabla, $item, $valor);
       return $respuesta;
   }

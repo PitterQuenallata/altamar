@@ -30,16 +30,14 @@ class ControladorAreasSociales {
           // Validar los datos de entrada
           if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaDescripcion"]) &&
               preg_match('/^[0-9.]+$/', $_POST["nuevoPrecio"])) {
-
+              
               $tabla = "area_social";
-
+							$precioD = $_POST["nuevoPrecio"];
               $datos = array(
                   "descripcion" => $_POST["nuevaDescripcion"],
-                  "precio" => $_POST["nuevoPrecio"],
-                  "fecha" => date('Y-m-d'),
-                  "estado" => 1 // Activo por defecto
+                  "precio" => $precioD,
               );
-
+              print_r($datos);
               $respuesta = ModeloAreasSociales::mdlIngresarAreaSocial($tabla, $datos);
 
               if ($respuesta == "ok") {

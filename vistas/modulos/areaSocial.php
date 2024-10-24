@@ -113,7 +113,8 @@ MODAL AGREGAR ÁREA SOCIAL
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-building"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="nuevaDescripcion" placeholder="Ingresar descripción" required>
+              <input type="text" class="form-control input-lg" name="nuevaDescripcion" placeholder="Ingresar descripción" required oninput="validateJS(event, 'text')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
           <div class="form-group">
@@ -122,7 +123,8 @@ MODAL AGREGAR ÁREA SOCIAL
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-dollar-sign"></i></span>
               </div>
-              <input type="number" class="form-control input-lg" name="nuevoPrecio" step="0.01" placeholder="Ingresar precio" required>
+              <input type="number" class="form-control input-lg" name="nuevoPrecio" step="0.01" placeholder="Ingresar precio" required onchange="validateJS(event, 'decimal')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
         </div>
@@ -170,8 +172,9 @@ MODAL EDITAR ÁREA SOCIAL
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-building"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="editarDescripcion" id="editarDescripcion" required>
+              <input type="text" class="form-control input-lg" name="editarDescripcion" id="editarDescripcion" required oninput="validateJS(event, 'text')">
               <input type="hidden" id="idAreaSocial" name="idAreaSocial">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->  
             </div>
           </div>
           <div class="form-group">
@@ -180,7 +183,8 @@ MODAL EDITAR ÁREA SOCIAL
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-dollar-sign"></i></span>
               </div>
-              <input type="number" class="form-control input-lg" name="editarPrecio" id="editarPrecio" step="0.01" required>
+              <input type="number" class="form-control input-lg" name="editarPrecio" id="editarPrecio" step="0.01" required onchange="validateJS(event, 'decimal')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
         </div>

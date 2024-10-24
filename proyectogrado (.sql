@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2024 a las 12:32:42
+-- Tiempo de generación: 24-10-2024 a las 18:19:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -39,75 +39,77 @@ CREATE TABLE `alquiler` (
 
 -- --------------------------------------------------------
 
-
--- area social
+--
+-- Estructura de tabla para la tabla `area_social`
+--
 
 CREATE TABLE `area_social` (
   `id` int(11) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
-  `precio` decimal(10,2) NOT NULL
+  `precio` decimal(10,2) NOT NULL,
+  `estado` tinyint(4) NOT NULL DEFAULT 1,
+  `fecha` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `area_social`
 --
 
-INSERT INTO `area_social` (`id`, `descripcion`, `precio`) VALUES
-(1, 'Salón de Eventos', 200.00),
-(2, 'Piscina', 150.00),
-(3, 'Gimnasio', 100.00),
-(4, 'Terraza', 80.00),
-(5, 'Cancha de Tenis', 120.00),
-(6, 'Barbacoa', 90.00),
-(7, 'Sala de Juegos', 70.00),
-(8, 'Cafetería', 50.00),
-(9, 'Parque Infantil', 40.00),
-(10, 'Salón de Lectura', 30.00),
-(11, 'Auditorio', 60.00),
-(12, 'Salón de Reuniones', 110.00),
-(13, 'Estudio de Danza', 75.00),
-(14, 'Cine', 160.00),
-(15, 'Pista de Correr', 95.00),
-(16, 'Zona de BBQ', 85.00),
-(17, 'Salón de Arte', 55.00),
-(18, 'Clínica de Mascotas', 45.00),
-(19, 'Sala de Conferencias', 130.00),
-(20, 'Spa', 140.00),
-(21, 'Pabellón Deportivo', 135.00),
-(22, 'Salón de Yoga', 110.00),
-(23, 'Terraza de Juegos', 65.00),
-(24, 'Salón de Música', 120.00),
-(25, 'Zona de Estudio', 50.00),
-(26, 'Sala de Tecnología', 100.00),
-(27, 'Pabellón de Arte', 90.00),
-(28, 'Área de Relajación', 80.00),
-(29, 'Salón de Adultos', 70.00),
-(30, 'Cafetería al Aire Libre', 60.00),
-(31, 'Mini Golf', 120.00),
-(32, 'Salón de Reciclaje', 40.00),
-(33, 'Jardín Botánico', 150.00),
-(34, 'Salón de Cuidado Infantil', 30.00),
-(35, 'Centro de Yoga', 55.00),
-(36, 'Salón de Cultura', 75.00),
-(37, 'Zona de Juego de Mesa', 50.00),
-(38, 'Salón de Tecnología', 100.00),
-(39, 'Área de Descanso', 90.00),
-(40, 'Cine al Aire Libre', 160.00),
-(41, 'Centro de Entrenamiento', 130.00),
-(42, 'Zona de Meditación', 70.00),
-(43, 'Salón de Fiesta', 150.00),
-(44, 'Jardín de Eventos', 140.00),
-(45, 'Salón de Presentaciones', 110.00),
-(46, 'Terraza de Relajación', 80.00),
-(47, 'Área de Juego Infantil', 40.00),
-(48, 'Salón de Reuniones Pequeñas', 60.00),
-(49, 'Sala de Convivencia', 90.00),
-(50, 'Gimnasio al Aire Libre', 100.00),
-(51, 'Salón de Manualidades', 30.00),
-(52, 'Zona de Aventura', 120.00),
-(53, 'Salón de Arte Infantil', 70.00);
+INSERT INTO `area_social` (`id`, `descripcion`, `precio`, `estado`, `fecha`) VALUES
+(1, 'Salon de Eventos', 500.00, 1, '2024-10-24'),
+(3, 'Gimnasio', 100.00, 1, '2024-10-24'),
+(4, 'Terraza', 80.00, 1, '2024-10-24'),
+(5, 'Cancha de Tenis', 120.00, 1, '2024-10-24'),
+(6, 'Barbacoa', 90.00, 1, '2024-10-24'),
+(7, 'Sala de Juegos', 70.00, 1, '2024-10-24'),
+(8, 'Cafetería', 50.00, 1, '2024-10-24'),
+(9, 'Parque Infantil', 40.00, 1, '2024-10-24'),
+(10, 'Salón de Lectura', 30.00, 1, '2024-10-24'),
+(11, 'Auditorio', 60.00, 1, '2024-10-24'),
+(12, 'Salón de Reuniones', 110.00, 1, '2024-10-24'),
+(13, 'Estudio de Danza', 75.00, 1, '2024-10-24'),
+(14, 'Cine', 160.00, 1, '2024-10-24'),
+(15, 'Pista de Correr', 95.00, 1, '2024-10-24'),
+(16, 'Zona de BBQ', 85.00, 1, '2024-10-24'),
+(17, 'Salón de Arte', 55.00, 1, '2024-10-24'),
+(18, 'Clínica de Mascotas', 45.00, 1, '2024-10-24'),
+(19, 'Sala de Conferencias', 130.00, 1, '2024-10-24'),
+(20, 'Spa', 140.00, 1, '2024-10-24'),
+(21, 'Pabellón Deportivo', 135.00, 1, '2024-10-24'),
+(22, 'Salón de Yoga', 110.00, 1, '2024-10-24'),
+(23, 'Terraza de Juegos', 65.00, 1, '2024-10-24'),
+(24, 'Salón de Música', 120.00, 1, '2024-10-24'),
+(25, 'Zona de Estudio', 50.00, 1, '2024-10-24'),
+(26, 'Sala de Tecnología', 100.00, 1, '2024-10-24'),
+(27, 'Pabellón de Arte', 90.00, 1, '2024-10-24'),
+(28, 'Área de Relajación', 80.00, 1, '2024-10-24'),
+(29, 'Salón de Adultos', 70.00, 1, '2024-10-24'),
+(30, 'Cafetería al Aire Libre', 60.00, 1, '2024-10-24'),
+(31, 'Mini Golf', 120.00, 1, '2024-10-24'),
+(32, 'Salón de Reciclaje', 40.00, 1, '2024-10-24'),
+(33, 'Jardín Botánico', 150.00, 1, '2024-10-24'),
+(34, 'Salón de Cuidado Infantil', 30.00, 1, '2024-10-24'),
+(35, 'Centro de Yoga', 55.00, 1, '2024-10-24'),
+(36, 'Salón de Cultura', 75.00, 1, '2024-10-24'),
+(37, 'Zona de Juego de Mesa', 50.00, 1, '2024-10-24'),
+(38, 'Salón de Tecnología', 100.00, 1, '2024-10-24'),
+(39, 'Área de Descanso', 90.00, 1, '2024-10-24'),
+(40, 'Cine al Aire Libre', 160.00, 1, '2024-10-24'),
+(41, 'Centro de Entrenamiento', 130.00, 1, '2024-10-24'),
+(42, 'Zona de Meditación', 70.00, 1, '2024-10-24'),
+(43, 'Salón de Fiesta', 150.00, 1, '2024-10-24'),
+(44, 'Jardín de Eventos', 140.00, 1, '2024-10-24'),
+(45, 'Salón de Presentaciones', 110.00, 1, '2024-10-24'),
+(46, 'Terraza de Relajación', 80.00, 1, '2024-10-24'),
+(47, 'Área de Juego Infantil', 40.00, 1, '2024-10-24'),
+(48, 'Salón de Reuniones Pequeñas', 60.00, 1, '2024-10-24'),
+(49, 'Sala de Convivencia', 90.00, 1, '2024-10-24'),
+(50, 'Gimnasio al Aire Libre', 100.00, 1, '2024-10-24'),
+(51, 'Salón de Manualidades', 30.00, 1, '2024-10-24'),
+(52, 'Zona de Aventura', 120.00, 1, '2024-10-24'),
+(54, 'Salon de area infantil', 70.00, 1, '2024-10-24'),
+(106, 'Piscina', 70.00, 1, '2024-10-24');
 
--- --------------------------------------------------------
 -- --------------------------------------------------------
 
 --
@@ -128,8 +130,8 @@ CREATE TABLE `detalle_alquiler` (
 
 CREATE TABLE `mensualidad` (
   `id` int(11) NOT NULL,
-  `mes` varchar(50) NOT NULL,
-  `gestion` varchar(4) NOT NULL,
+  `mes` int(2) DEFAULT NULL,
+  `gestion` int(4) NOT NULL,
   `costo` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -138,54 +140,54 @@ CREATE TABLE `mensualidad` (
 --
 
 INSERT INTO `mensualidad` (`id`, `mes`, `gestion`, `costo`) VALUES
-(2, 'Febrero', '2024', 100.00),
-(3, 'Marzo', '2024', 100.00),
-(4, 'Abril', '2024', 100.00),
-(5, 'Mayo', '2024', 100.00),
-(6, 'Junio', '2024', 100.00),
-(7, 'Julio', '2024', 100.00),
-(8, 'Agosto', '2024', 100.00),
-(9, 'Septiembre', '2024', 100.00),
-(10, 'Octubre', '2024', 100.00),
-(11, 'Noviembre', '2024', 100.00),
-(12, 'Diciembre', '2024', 100.00),
-(13, 'Enero', '2025', 100.00),
-(14, 'Febrero', '2025', 100.00),
-(15, 'Marzo', '2025', 100.00),
-(16, 'Abril', '2025', 100.00),
-(17, 'Mayo', '2025', 100.00),
-(18, 'Junio', '2025', 100.00),
-(19, 'Julio', '2025', 100.00),
-(20, 'Agosto', '2025', 100.00),
-(21, 'Septiembre', '2025', 100.00),
-(22, 'Octubre', '2025', 100.00),
-(23, 'Noviembre', '2025', 100.00),
-(24, 'Diciembre', '2025', 100.00),
-(25, 'Enero', '2026', 100.00),
-(26, 'Febrero', '2026', 100.00),
-(27, 'Marzo', '2026', 100.00),
-(28, 'Abril', '2026', 100.00),
-(29, 'Mayo', '2026', 100.00),
-(30, 'Junio', '2026', 100.00),
-(31, 'Julio', '2026', 100.00),
-(32, 'Agosto', '2026', 100.00),
-(33, 'Septiembre', '2026', 100.00),
-(34, 'Octubre', '2026', 100.00),
-(35, 'Noviembre', '2026', 100.00),
-(36, 'Diciembre', '2026', 100.00),
-(37, 'Enero', '2027', 100.00),
-(38, 'Febrero', '2027', 100.00),
-(39, 'Marzo', '2027', 100.00),
-(40, 'Abril', '2027', 100.00),
-(41, 'Mayo', '2027', 100.00),
-(42, 'Junio', '2027', 100.00),
-(43, 'Julio', '2027', 100.00),
-(44, 'Agosto', '2027', 100.00),
-(45, 'Septiembre', '2027', 100.00),
-(46, 'Octubre', '2027', 100.00),
-(47, 'Noviembre', '2027', 100.00),
-(48, 'Diciembre', '2027', 100.00),
-(49, 'Diciembre', '2028', 700.00);
+(2, 2, 2024, 100.00),
+(3, 3, 2024, 100.00),
+(4, 4, 2024, 100.00),
+(5, 5, 2024, 100.00),
+(6, 6, 2024, 100.00),
+(7, 7, 2024, 100.00),
+(8, 8, 2024, 100.00),
+(9, 9, 2024, 100.00),
+(10, 10, 2024, 100.00),
+(11, 11, 2024, 100.00),
+(12, 12, 2024, 100.00),
+(13, 1, 2025, 100.00),
+(14, 2, 2025, 100.00),
+(15, 3, 2025, 100.00),
+(16, 4, 2025, 100.00),
+(17, 5, 2025, 100.00),
+(18, 6, 2025, 100.00),
+(19, 7, 2025, 100.00),
+(20, 8, 2025, 100.00),
+(21, 9, 2025, 100.00),
+(22, 10, 2025, 100.00),
+(23, 11, 2025, 100.00),
+(24, 12, 2025, 100.00),
+(25, 1, 2026, 100.00),
+(26, 2, 2026, 100.00),
+(27, 3, 2026, 100.00),
+(28, 4, 2026, 100.00),
+(29, 5, 2026, 100.00),
+(30, 6, 2026, 100.00),
+(31, 7, 2026, 100.00),
+(32, 8, 2026, 100.00),
+(33, 9, 2026, 100.00),
+(34, 10, 2026, 100.00),
+(35, 11, 2026, 100.00),
+(36, 12, 2026, 100.00),
+(37, 1, 2027, 100.00),
+(38, 2, 2027, 100.00),
+(39, 3, 2027, 100.00),
+(40, 4, 2027, 100.00),
+(41, 5, 2027, 100.00),
+(42, 6, 2027, 100.00),
+(43, 7, 2027, 100.00),
+(44, 8, 2027, 100.00),
+(45, 9, 2027, 100.00),
+(46, 10, 2027, 100.00),
+(47, 11, 2027, 100.00),
+(48, 12, 2027, 100.00),
+(49, 12, 2028, 700.00);
 
 -- --------------------------------------------------------
 
@@ -218,6 +220,7 @@ CREATE TABLE `propietario` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(250) NOT NULL,
   `nroDpto` varchar(10) NOT NULL,
+  `fecha` date DEFAULT current_timestamp(),
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -225,8 +228,8 @@ CREATE TABLE `propietario` (
 -- Volcado de datos para la tabla `propietario`
 --
 
-INSERT INTO `propietario` (`id`, `nombre`, `apellido_paterno`, `apellido_materno`, `nroCarnet`, `telefono`, `correo`, `nroDpto`, `id_usuario`) VALUES
-(51, 'juan', 'pérez', 'garcía', '20000000', '67033811', 'juan.perez@example.com', 'A101', 1);
+INSERT INTO `propietario` (`id`, `nombre`, `apellido_paterno`, `apellido_materno`, `nroCarnet`, `telefono`, `correo`, `nroDpto`, `fecha`, `id_usuario`) VALUES
+(51, 'juan', 'pérez', 'garcía', '20000000', '67033811', 'juan.perez@example.com', 'A101', '2024-03-01', 1);
 
 -- --------------------------------------------------------
 
@@ -253,7 +256,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido_paterno`, `apellido_materno`, `usuario`, `password`, `telefono`, `correo`, `rol`, `estado`, `ultimo_login`) VALUES
-(1, 'juan', 'perez', 'mamani', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', '71234567', 'juan.perez@example.com', 'administrador', 1, '2024-10-23 12:51:37');
+(1, 'juan', 'perez', 'mamani', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', '71234567', 'juan.perez@example.com', 'administrador', 1, '2024-10-24 12:15:50');
 
 --
 -- Índices para tablas volcadas
@@ -267,9 +270,11 @@ ALTER TABLE `alquiler`
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_propietario` (`id_propietario`);
 
-  ALTER TABLE `area_social`
+--
+-- Indices de la tabla `area_social`
+--
+ALTER TABLE `area_social`
   ADD PRIMARY KEY (`id`);
-
 
 --
 -- Indices de la tabla `detalle_alquiler`
@@ -315,6 +320,12 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `alquiler`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `area_social`
+--
+ALTER TABLE `area_social`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad`
