@@ -14,9 +14,11 @@ $(document).ready(function() {
       success: function(respuesta) {
         // Llenar el formulario en el modal con los datos obtenidos
         $("#editarNombre").val(respuesta.nombre);
-        $("#editarApellido").val(respuesta.apellido);
+        $("#editarApellido").val(respuesta.apellido_paterno);
+        $("#editarApellidoMaterno").val(respuesta.apellido_materno); // Llenar apellido materno
         $("#editarUsuario").val(respuesta.usuario);
         $("#editarTelefono").val(respuesta.telefono);
+        $("#editarCorreo").val(respuesta.correo); // Llenar correo
         $("#editarRol").val(respuesta.rol);
         $("#editarEstado").val(respuesta.estado);
         $("#idUsuario").val(respuesta.id);

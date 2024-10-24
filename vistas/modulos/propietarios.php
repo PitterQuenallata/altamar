@@ -37,19 +37,19 @@
       </div>
 
       <div class="card-body">
-        <table id="" class="table table-bordered table-hover table-striped">
+        <table id="propietarios" class="table table-sm table-hover table-striped">
           <thead>
             <tr>
               <th style="width:10px">#</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
+              <th>Nombres</th>
+              <th>Apellido paterno</th>
+              <th>Apellido materno</th>
               <th>Nro Carnet</th>
               <th>Teléfono</th>
               <th>Correo</th>
-              <th>Actividad</th>
               <th>Nro Dpto</th>
               <th>Acciones</th>
-            </tr> 
+            </tr>
           </thead>
           <tbody>
             <?php
@@ -60,18 +60,22 @@
 
             foreach ($propietarios as $key => $value) {
               echo '<tr>
-                      <td>'.($key+1).'</td>
-                      <td>'.$value["nombre"].'</td>
-                      <td>'.$value["apellido"].'</td>
-                      <td>'.$value["nroCarnet"].'</td>
-                      <td>'.$value["telefono"].'</td>
-                      <td>'.$value["correo"].'</td>
-                      <td>'.$value["actividad"].'</td>
-                      <td>'.$value["nroDpto"].'</td>
+                      <td>' . ($key + 1) . '</td>
+                      <td>' . mb_strtoupper($value["nombre"], 'UTF-8') . '</td>
+                      <td>' . mb_strtoupper($value["apellido_paterno"], 'UTF-8') . '</td>
+                      <td>' . mb_strtoupper($value["apellido_materno"], 'UTF-8') . '</td>             
+                      <td>' . $value["nroCarnet"] . '</td>
+                      <td>' . $value["telefono"] . '</td>
+                      <td>' . $value["correo"] . '</td>
+                      <td>' . $value["nroDpto"] . '</td>
                       <td>
                         <div class="btn-group">
-                          <button class="btn btn-warning btnEditarPropietario" idPropietario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarPropietario"><i class="fa fa-pencil-alt"></i></button>
-                          <button class="btn btn-danger btnEliminarPropietario" idPropietario="'.$value["id"].'"><i class="fa fa-trash-alt"></i></button>
+                          <button class="btn btn-warning btnEditarPropietario" data-id="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarPropietario">
+                            <i class="fa fa-pencil-alt"></i>
+                          </button>
+                          <button class="btn btn-danger btnEliminarPropietario" data-id="' . $value["id"] . '">
+                            <i class="fa fa-trash-alt"></i>
+                          </button>
                         </div>  
                       </td>
                     </tr>';
@@ -105,8 +109,6 @@ MODAL AGREGAR PROPIETARIO
 
         <!-- Cuerpo del modal -->
         <div class="modal-body">
-          <!-- Campo oculto para el ID del usuario que registra -->
-          
 
           <div class="form-group">
             <!-- Entrada para el nombre -->
@@ -114,17 +116,30 @@ MODAL AGREGAR PROPIETARIO
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-user"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="nuevoNombre" placeholder="Ingresar nombre" required>
+              <input type="text" class="form-control input-lg" name="nuevoNombre" placeholder="Ingresar nombres" required style="text-transform: uppercase;" oninput="validateJS(event, 'text')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
           <div class="form-group">
-            <!-- Entrada para el apellido -->
+            <!-- Entrada para el apellido paterno -->
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-user"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="nuevoApellido" placeholder="Ingresar apellido" required>
+              <input type="text" class="form-control input-lg" name="nuevoApellidoPaterno" placeholder="Ingresar apellido paterno" required style="text-transform: uppercase;" oninput="validateJS(event, 'text')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <!-- Entrada para el apellido materno -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control input-lg" name="nuevoApellidoMaterno" placeholder="Ingresar apellido materno" required style="text-transform: uppercase;" oninput="validateJS(event, 'text')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
@@ -135,6 +150,7 @@ MODAL AGREGAR PROPIETARIO
                 <span class="input-group-text"><i class="fa fa-id-card"></i></span>
               </div>
               <input type="text" class="form-control input-lg" name="nuevoNroCarnet" placeholder="Ingresar nro carnet" required>
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
@@ -144,7 +160,8 @@ MODAL AGREGAR PROPIETARIO
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-phone"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" required>
+              <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" required onchange="validateJS(event, 'phone')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
@@ -154,17 +171,8 @@ MODAL AGREGAR PROPIETARIO
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-envelope"></i></span>
               </div>
-              <input type="email" class="form-control input-lg" name="nuevoCorreo" placeholder="Ingresar correo" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <!-- Entrada para la actividad -->
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-briefcase"></i></span>
-              </div>
-              <input type="text" class="form-control input-lg" name="nuevaActividad" placeholder="Ingresar actividad" required>
+              <input type="email" class="form-control input-lg" name="nuevoCorreo" placeholder="Ingresar correo" required onchange="validateJS(event, 'email')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
@@ -175,10 +183,13 @@ MODAL AGREGAR PROPIETARIO
                 <span class="input-group-text"><i class="fa fa-building"></i></span>
               </div>
               <input type="text" class="form-control input-lg" name="nuevoNroDpto" placeholder="Ingresar nro dpto" required>
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
         </div>
-        <input type="hidden" class="form-group" name="idusuario" value="<?php echo $_SESSION['id']; ?>">
+
+        <input type="hidden" class="form-group" name="idUsuario" value="<?php echo $_SESSION['id']; ?>">
+
         <!-- Pie del modal -->
         <div class="modal-footer justify-content-end">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
@@ -186,16 +197,18 @@ MODAL AGREGAR PROPIETARIO
         </div>
 
         <?php
-          // Llamada al controlador para agregar un nuevo propietario
-          if (isset($_POST['nuevoNombre'])) {
-              $crearPropietario = new ControladorPropietarios();
-              $crearPropietario->ctrCrearPropietario();
-          }
+        // Llamada al controlador para agregar un nuevo propietario
+        if (isset($_POST['nuevoNombre'])) {
+          $crearPropietario = new ControladorPropietarios();
+          $crearPropietario->ctrCrearPropietario();
+        }
         ?>
       </form>
     </div>
   </div>
 </div>
+
+
 
 
 <!--=====================================
@@ -215,7 +228,7 @@ MODAL EDITAR PROPIETARIO
 
         <!-- Cuerpo del modal -->
         <div class="modal-body">
-          <!-- Campo oculto para el ID del propietario -->
+          <!-- Campo oculto para el ID del propietario y el ID del usuario -->
           <input type="hidden" name="idPropietario" id="idPropietario">
           <input type="hidden" name="idUsuario" id="idUsuario">
 
@@ -225,17 +238,30 @@ MODAL EDITAR PROPIETARIO
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-user"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="editarNombre" id="editarNombre" placeholder="Ingresar nombre" required>
+              <input type="text" class="form-control input-lg" name="editarNombre" id="editarNombre" placeholder="Ingresar nombre" required style="text-transform: uppercase;" oninput="validateJS(event, 'text')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
           <div class="form-group">
-            <!-- Entrada para el apellido -->
+            <!-- Entrada para el apellido paterno -->
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-user"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="editarApellido" id="editarApellido" placeholder="Ingresar apellido" required>
+              <input type="text" class="form-control input-lg" name="editarApellidoPaterno" id="editarApellidoPaterno" placeholder="Ingresar apellido paterno" required style="text-transform: uppercase;" oninput="validateJS(event, 'text')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <!-- Entrada para el apellido materno -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control input-lg" name="editarApellidoMaterno" id="editarApellidoMaterno" placeholder="Ingresar apellido materno" required style="text-transform: uppercase;" oninput="validateJS(event, 'text')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
@@ -246,6 +272,7 @@ MODAL EDITAR PROPIETARIO
                 <span class="input-group-text"><i class="fa fa-id-card"></i></span>
               </div>
               <input type="text" class="form-control input-lg" name="editarNroCarnet" id="editarNroCarnet" placeholder="Ingresar nro carnet" required>
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
@@ -255,7 +282,8 @@ MODAL EDITAR PROPIETARIO
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-phone"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" placeholder="Ingresar teléfono" required>
+              <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" placeholder="Ingresar teléfono" required onchange="validateJS(event, 'phone')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
@@ -265,17 +293,8 @@ MODAL EDITAR PROPIETARIO
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-envelope"></i></span>
               </div>
-              <input type="email" class="form-control input-lg" name="editarCorreo" id="editarCorreo" placeholder="Ingresar correo" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <!-- Entrada para la actividad -->
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-briefcase"></i></span>
-              </div>
-              <input type="text" class="form-control input-lg" name="editarActividad" id="editarActividad" placeholder="Ingresar actividad" required>
+              <input type="email" class="form-control input-lg" name="editarCorreo" id="editarCorreo" placeholder="Ingresar correo" required onchange="validateJS(event, 'email')">
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
 
@@ -286,9 +305,11 @@ MODAL EDITAR PROPIETARIO
                 <span class="input-group-text"><i class="fa fa-building"></i></span>
               </div>
               <input type="text" class="form-control input-lg" name="editarNroDpto" id="editarNroDpto" placeholder="Ingresar nro dpto" required>
+              <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
         </div>
+
 
         <!-- Pie del modal -->
         <div class="modal-footer justify-content-end">
@@ -297,11 +318,11 @@ MODAL EDITAR PROPIETARIO
         </div>
 
         <?php
-          // Llamada al controlador para editar un propietario
-          if (isset($_POST['editarNombre'])) {
-              $editarPropietario = new ControladorPropietarios();
-              $editarPropietario->ctrEditarPropietario();
-          }
+        // Llamada al controlador para editar un propietario
+        if (isset($_POST['editarNombre'])) {
+          $editarPropietario = new ControladorPropietarios();
+          $editarPropietario->ctrEditarPropietario();
+        }
         ?>
       </form>
     </div>
@@ -311,8 +332,9 @@ MODAL EDITAR PROPIETARIO
 
 
 
+
 <?php
-  $borrarPropietario = new ControladorPropietarios();
-  $borrarPropietario -> ctrBorrarPropietario();
+$borrarPropietario = new ControladorPropietarios();
+$borrarPropietario->ctrBorrarPropietario();
 
 ?>

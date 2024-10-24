@@ -34,7 +34,7 @@ class ModeloUsuarios{
     INGRESAR USUARIO
     =============================================*/
     static public function mdlIngresarUsuario($tabla, $datos) {
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, apellido_paterno, apellido_materno, usuario, password, rol, telefono, estado) VALUES (:nombre, :apellido_paterno,:apellido_materno :usuario, :password, :rol, :telefono, :estado)");
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, apellido_paterno, apellido_materno, usuario, password, rol, telefono, correo, estado) VALUES (:nombre, :apellido_paterno, :apellido_materno, :usuario, :password, :rol, :telefono, :correo, :estado)");
 
 			$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 			$stmt->bindParam(":apellido_paterno", $datos["apellido_paterno"], PDO::PARAM_STR);
@@ -43,6 +43,7 @@ class ModeloUsuarios{
 			$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
 			$stmt->bindParam(":rol", $datos["rol"], PDO::PARAM_STR);
 			$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+			$stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
 			$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_INT);
 
 			if ($stmt->execute()) {
@@ -54,29 +55,41 @@ class ModeloUsuarios{
 			$stmt = null;
 	}
 
-    /*=============================================
-    EDITAR USUARIO
-    =============================================*/
-    static public function mdlEditarUsuario($tabla, $datos) {
-			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, apellido_paterno = :apellido_paterno, usuario = :usuario, password = :password, rol = :rol, telefono = :telefono, estado = :estado WHERE id = :id");
+/*=============================================
+EDITAR USUARIO
+=============================================*/
+static public function mdlEditarUsuario($tabla, $datos) {
+	$stmt = Conexion::conectar()->prepare("UPDATE $tabla 
+			SET nombre = :nombre, 
+					apellido_paterno = :apellido_paterno, 
+					apellido_materno = :apellido_materno, 
+					usuario = :usuario, 
+					password = :password, 
+					rol = :rol, 
+					telefono = :telefono, 
+					correo = :correo, 
+					estado = :estado 
+			WHERE id = :id");
 
-			$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-			$stmt->bindParam(":apellido_paterno", $datos["apellido_paterno"], PDO::PARAM_STR);
-			$stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
-			$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
-			$stmt->bindParam(":rol", $datos["rol"], PDO::PARAM_STR);
-			$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
-			$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_INT);
-			$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+	$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+	$stmt->bindParam(":apellido_paterno", $datos["apellido_paterno"], PDO::PARAM_STR);
+	$stmt->bindParam(":apellido_materno", $datos["apellido_materno"], PDO::PARAM_STR); // Nuevo campo agregado
+	$stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
+	$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
+	$stmt->bindParam(":rol", $datos["rol"], PDO::PARAM_STR);
+	$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+	$stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR); // Nuevo campo agregado
+	$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_INT);
+	$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
 
-			if ($stmt->execute()) {
-					return "ok";
-			} else {
-					return "error";
-			}
-
-			$stmt = null;
+	if ($stmt->execute()) {
+			return "ok";
+	} else {
+			return "error";
 	}
+
+	$stmt = null;
+}
 
 	/*=============================================
 	ACTUALIZAR USUARIO

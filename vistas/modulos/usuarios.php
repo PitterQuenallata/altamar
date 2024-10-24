@@ -42,8 +42,8 @@
             <tr>
               <th style="width:10px">#</th>
               <th>Nombres</th>
-              <th>Apellido Paterno</th>
-              <th>Aplliedo Materno</th>
+              <th>Apellidos</th>
+              <th>Correo</th>
               <th>Usuario</th>
               <th>Rol</th>
               <th>Telefono</th>
@@ -62,9 +62,9 @@
             foreach ($usuarios as $key => $value) {
               echo '<tr>
                       <td>'.($key+1).'</td>
-                      <td>'.ucwords($value["nombre"]).'</td>
-                      <td>'.ucwords($value["apellido_paterno"]).'</td>
-                      <td>'.ucwords($value["apellido_materno"]).'</td>
+                      <td>'.mb_strtoupper($value["nombre"], 'UTF-8').'</td>
+                      <td>'.mb_strtoupper($value["apellido_paterno"], 'UTF-8').' '.mb_strtoupper($value["apellido_materno"], 'UTF-8').'</td>
+                      <td>'.mb_strtoupper($value["correo"], 'UTF-8').'</td>
                       <td>'.$value["usuario"].'</td>
                       <td>'.$value["rol"].'</td>
                       <td>'.$value["telefono"].'</td>
@@ -170,7 +170,6 @@ MODAL AGREGAR USUARIO
           </div>
 
 
-
           <div class="form-group">
             <!-- ENTRADA PARA SELECCIONAR SU ROL -->
             <div class="input-group">
@@ -191,10 +190,22 @@ MODAL AGREGAR USUARIO
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-phone"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" required oninput="validateJS(event, 'integer')">
+              <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar nro. celular" required onchange="validateJS(event, 'phone')">
               <div class="invalid-feedback"></div>
             </div>
           </div>
+
+          <div class="form-group">
+            <!-- ENTRADA PARA EL TELEFONO -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+              </div>
+              <input type="email" class="form-control input-lg" name="nuevoCorreo"  onchange="validateJS(event, 'email')" placeholder="Ingresar correo">
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+
         </div>
 
         <!--=====================================
@@ -225,7 +236,6 @@ MODAL AGREGAR USUARIO
 <!--=====================================
 MODAL EDITAR USUARIO
 ======================================-->
-
 <div id="modalEditarUsuario" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -243,39 +253,40 @@ MODAL EDITAR USUARIO
         CUERPO DEL MODAL
         ======================================-->
         <div class="modal-body">
+          
+          <!-- ENTRADA PARA EL NOMBRE -->
           <div class="form-group">
-            <!-- ENTRADA PARA EL NOMBRE -->
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-user"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="editarNombre" id="editarNombre" placeholder="Ingresar nombre" required>
+              <input type="text" class="form-control input-lg" name="editarNombre" id="editarNombre" placeholder="Ingresar nombre" required style="text-transform: uppercase;" oninput="validateJS(event, 'text')">
               <input type="hidden" name="idUsuario" id="idUsuario">
             </div>
           </div>
 
+          <!-- ENTRADA PARA EL APELLIDO -->
           <div class="form-group">
-            <!-- ENTRADA PARA EL APELLIDO -->
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-user"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="editarApellido" id="editarApellido" placeholder="Ingresar apellido" required>
+              <input type="text" class="form-control input-lg" name="editarApellido" id="editarApellido" placeholder="Ingresar apellido paterno" required style="text-transform: uppercase;" oninput="validateJS(event, 'text')">
             </div>
           </div>
 
+          <!-- ENTRADA PARA EL APELLIDO MATERNO -->
           <div class="form-group">
-            <!-- ENTRADA PARA EL APELLIDO MATERNO-->
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-user"></i></span>
               </div>
-              <input type="text" class="form-control input-lg" name="editarApellidoMaterno" id="editarApellidoMaterno" placeholder="Ingresar apellido" required>
+              <input type="text" class="form-control input-lg" name="editarApellidoMaterno" id="editarApellidoMaterno" placeholder="Ingresar apellido materno" required style="text-transform: uppercase;" oninput="validateJS(event, 'text')">
             </div>
           </div>
 
+          <!-- ENTRADA PARA EL USUARIO -->
           <div class="form-group">
-            <!-- ENTRADA PARA EL USUARIO -->
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-key"></i></span>
@@ -284,43 +295,42 @@ MODAL EDITAR USUARIO
             </div>
           </div>
 
+          <!-- ENTRADA PARA EL TELEFONO -->
           <div class="form-group">
-            <!-- ENTRADA PARA LA CONTRASEÑA -->
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                <span class="input-group-text"><i class="fa fa-phone"></i></span>
               </div>
-              <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Ingresar nueva contraseña">
-              <input type="hidden" name="passwordActual" id="passwordActual">
+              <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" placeholder="Ingresar nro. celular" required onchange="validateJS(event, 'phone')">
             </div>
           </div>
 
+          <!-- ENTRADA PARA EL CORREO ELECTRÓNICO -->
           <div class="form-group">
-            <!-- ENTRADA PARA SELECCIONAR SU ROL -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+              </div>
+              <input type="email" class="form-control input-lg" name="editarCorreo" id="editarCorreo" placeholder="Ingresar correo electrónico">
+            </div>
+          </div>
+
+          <!-- ENTRADA PARA SELECCIONAR SU ROL -->
+          <div class="form-group">
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-users"></i></span>
               </div>
               <select class="form-control input-lg" name="editarRol" id="editarRol" required>
                 <option value="">Seleccionar rol</option>
-                <option value="Administrador">Administrador</option>
-                <option value="Guardia">Guardia</option>
+                <option value="administrador">Administrador</option>
+                <option value="guardia">Guardia</option>
               </select>
             </div>
           </div>
 
+          <!-- ENTRADA PARA SELECCIONAR ESTADO -->
           <div class="form-group">
-            <!-- ENTRADA PARA EL TELEFONO -->
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-phone"></i></span>
-              </div>
-              <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" placeholder="Ingresar teléfono" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <!-- ENTRADA PARA SELECCIONAR ESTADO -->
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-toggle-on"></i></span>
@@ -331,6 +341,18 @@ MODAL EDITAR USUARIO
               </select>
             </div>
           </div>
+
+          <!-- ENTRADA PARA LA CONTRASEÑA -->
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              </div>
+              <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Ingresar nueva contraseña">
+              <input type="hidden" name="passwordActual" id="passwordActual">
+            </div>
+          </div>
+
         </div>
 
         <!--=====================================
@@ -352,6 +374,8 @@ MODAL EDITAR USUARIO
     </div>
   </div>
 </div>
+
+
 
 
 <?php

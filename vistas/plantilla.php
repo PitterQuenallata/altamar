@@ -36,7 +36,8 @@ session_start();
   <link rel="stylesheet" href="vistas/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="vistas/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
-
+  <link rel="stylesheet" href="vistas/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="vistas/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
 
 
@@ -106,13 +107,13 @@ session_start();
     if(isset($_GET["ruta"])){
 
       if($_GET["ruta"] == "inicio" ||
-      $_GET["ruta"] == "visitas" ||
       $_GET["ruta"] == "usuarios" ||
       $_GET["ruta"] == "propietarios" ||
+      $_GET["ruta"] == "mensualidad" ||     
       $_GET["ruta"] == "pagosmensual" ||
       $_GET["ruta"] == "areaSocial" ||
       $_GET["ruta"] == "alquiler" ||
-         $_GET["ruta"] == "salir"){
+      $_GET["ruta"] == "salir"){
 
         include "modulos/".$_GET["ruta"].".php";
 
@@ -149,11 +150,14 @@ session_start();
 
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/usuarios.js"></script>
-<script src="vistas/js/marcarSalida.js"></script>
-<script src="vistas/js/editarVisita.js"></script>
 <script src="vistas/js/propietarios.js"></script>
+<script src="vistas/js/mensualidades.js"></script>
+
+
 <script src="vistas/js/pago_mensualidades.js"></script>
 <script src="vistas/js/areas_sociales.js"></script>
 <script src="vistas/js/alquiler.js"></script>
+
+<script src="vistas/plugins/select2/js/select2.full.min.js"></script>
 
 </html>

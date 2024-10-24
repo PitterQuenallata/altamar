@@ -113,7 +113,7 @@ class ControladorUsuarios{
 							$valor = $_POST["nuevoUsuario"];
 	
 							$respuesta = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
-							print_r($respuesta);
+							//print_r($respuesta);
 							if ($respuesta) {
 									echo '<script>
 											swal({
@@ -133,21 +133,28 @@ class ControladorUsuarios{
 	
 							// Encriptar la contraseña
 							$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-	
+							
+							$nombre = mb_strtolower($_POST["nuevoNombre"], 'UTF-8');
+							$apellido = mb_strtolower($_POST["nuevoApellido"], 'UTF-8');
+							$apellidoMaterno = mb_strtolower($_POST["nuevoApellidoMaterno"], 'UTF-8');
+							
+
+
 							$tabla = "usuario";
 							$datos = array(
-									"nombre" => $_POST["nuevoNombre"],
-									"apellido_paterno" => $_POST["nuevoApellido"],
-									"apellido_materno" => $_POST["nuevoApellidoMaterno"],
+									"nombre" => $nombre,
+									"apellido_paterno" => $apellido,
+									"apellido_materno" => $apellidoMaterno,
 									"usuario" => $_POST["nuevoUsuario"],
 									"password" => $encriptar,
 									"rol" => $_POST["nuevoRol"],
 									"telefono" => $_POST["nuevoTelefono"],
+									"correo" => $_POST["nuevoCorreo"],
 									"estado" => 1 // Por defecto, el estado es activo
 							);
-							print_r($datos);
+							
 							$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
-	
+							print_r($respuesta);
 							if ($respuesta == "ok") {
 									echo '<script>
 											swal({
@@ -183,40 +190,47 @@ class ControladorUsuarios{
 	
 
 /*=============================================
-    EDITAR USUARIO
-    =============================================*/
-    public function ctrEditarUsuario() {
-			if (isset($_POST["editarNombre"])) {
+EDITAR USUARIO
+=============================================*/
+public function ctrEditarUsuario() {
+	if (isset($_POST["editarNombre"])) {
 
-					// Validar que los campos contienen solo letras y números
-					if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarNombre"]) &&
-							preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarApellido"]) &&
-							preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarUsuario"]) &&
-							preg_match('/^[0-9]+$/', $_POST["editarTelefono"])) {
+			// Validar que los campos contienen solo letras y números
+			if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarNombre"]) &&
+					preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarApellido"]) &&
+					preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarApellidoMaterno"]) && // Añadir validación para apellido materno
+					preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarUsuario"]) &&
+					preg_match('/^[0-9]+$/', $_POST["editarTelefono"])) {
 
-							// Verificar si la contraseña cambia
-							if ($_POST["editarPassword"] != "") {
-									$encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-							} else {
-									$encriptar = $_POST["passwordActual"];
-							}
+					// Verificar si la contraseña cambia
+					if ($_POST["editarPassword"] != "") {
+							$encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+					} else {
+							$encriptar = $_POST["passwordActual"];
+					}
 
-							$tabla = "usuario";
-							$datos = array(
-									"id" => $_POST["idUsuario"],
-									"nombre" => $_POST["editarNombre"],
-									"apellido" => $_POST["editarApellido"],
-									"usuario" => $_POST["editarUsuario"],
-									"password" => $encriptar,
-									"rol" => $_POST["editarRol"],
-									"telefono" => $_POST["editarTelefono"],
-									"estado" => $_POST["editarEstado"]
-							);
+					$nombre = mb_strtolower($_POST["editarNombre"], 'UTF-8');
+					$apellido = mb_strtolower($_POST["editarApellido"], 'UTF-8');
+					$apellidoMaterno = mb_strtolower($_POST["editarApellidoMaterno"], 'UTF-8');
 
-							$respuesta = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
+					$tabla = "usuario";
+					$datos = array(
+							"id" => $_POST["idUsuario"],
+							"nombre" => $nombre,
+							"apellido_paterno" => $apellido,
+							"apellido_materno" => $apellidoMaterno,
+							"usuario" => $_POST["editarUsuario"],
+							"password" => $encriptar,
+							"rol" => $_POST["editarRol"],
+							"telefono" => $_POST["editarTelefono"],
+							"correo" => $_POST["editarCorreo"], // Agregar el correo
+							"estado" => $_POST["editarEstado"]
+					);
 
-							if ($respuesta == "ok") {
-									echo '<script>
+					$respuesta = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
+
+					if ($respuesta == "ok") {
+							echo '<script>
 											swal({
 													type: "success",
 													title: "¡El usuario ha sido editado correctamente!",
@@ -228,9 +242,9 @@ class ControladorUsuarios{
 													}
 											});
 									</script>';
-							}
-					} else {
-							echo '<script>
+					}
+			} else {
+					echo '<script>
 									swal({
 											type: "error",
 											title: "¡Los datos del usuario no pueden ir vacíos o llevar caracteres especiales!",
@@ -242,11 +256,12 @@ class ControladorUsuarios{
 											}
 									});
 							</script>';
-							echo '<div class="alert alert-danger">Los datos del usuario no pueden ir vacíos o llevar caracteres especiales</div>';
-							return;
-					}
+					echo '<div class="alert alert-danger">Los datos del usuario no pueden ir vacíos o llevar caracteres especiales</div>';
+					return;
 			}
 	}
+}
+
 
 
 	/*=============================================
