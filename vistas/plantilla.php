@@ -112,7 +112,9 @@ session_start();
       $_GET["ruta"] == "mensualidad" ||     
       $_GET["ruta"] == "pagosmensual" ||
       $_GET["ruta"] == "areaSocial" ||
+      $_GET["ruta"] == "listaReservas" ||
       $_GET["ruta"] == "alquiler" ||
+      $_GET["ruta"] == "reportes" ||
       $_GET["ruta"] == "salir"){
 
         include "modulos/".$_GET["ruta"].".php";
@@ -152,11 +154,11 @@ session_start();
 <script src="vistas/js/usuarios.js"></script>
 <script src="vistas/js/propietarios.js"></script>
 <script src="vistas/js/mensualidades.js"></script>
-
-
 <script src="vistas/js/pago_mensualidades.js"></script>
 <script src="vistas/js/areas_sociales.js"></script>
-<script src="vistas/js/alquiler.js"></script>
+<script src="vistas/js/validacionFechaHora.js"></script>
+<script src="vistas/js/reservaAreaSocial.js"></script>
+<script src="vistas/js/listaReservas.js"></script>
 
 <script src="vistas/plugins/select2/js/select2.full.min.js"></script>
 

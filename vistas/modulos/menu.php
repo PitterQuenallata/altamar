@@ -79,7 +79,16 @@
             <a href="alquiler" class="nav-link">
               
               <p>
-                Alquiler de Areas
+                Reserva de Areas
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="listaReservas" class="nav-link">
+              
+              <p>
+                Lista de Reservas
               </p>
             </a>
           </li>

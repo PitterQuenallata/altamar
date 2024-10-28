@@ -94,7 +94,7 @@ MODAL AGREGAR MENSUALIDAD
 
         <!-- Cuerpo del modal -->
         <div class="modal-body">
-          
+
           <!-- Selector de mes con ícono -->
           <div class="form-group">
             <div class="input-group">
@@ -103,22 +103,23 @@ MODAL AGREGAR MENSUALIDAD
               </div>
               <select class="form-control" name="nuevoMes" required>
                 <option value="">Seleccionar mes</option>
-                <option value="Enero">Enero</option>
-                <option value="Febrero">Febrero</option>
-                <option value="Marzo">Marzo</option>
-                <option value="Abril">Abril</option>
-                <option value="Mayo">Mayo</option>
-                <option value="Junio">Junio</option>
-                <option value="Julio">Julio</option>
-                <option value="Agosto">Agosto</option>
-                <option value="Septiembre">Septiembre</option>
-                <option value="Octubre">Octubre</option>
-                <option value="Noviembre">Noviembre</option>
-                <option value="Diciembre">Diciembre</option>
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
               </select>
               <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
           </div>
+
 
           <!-- Selector de gestión (año) con ícono -->
           <div class="form-group">
@@ -126,12 +127,12 @@ MODAL AGREGAR MENSUALIDAD
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
               </div>
-              <select class="form-control" name="nuevaGestion"  required>
+              <select class="form-control" name="nuevaGestion" required>
                 <option value="">Seleccionar año</option>
                 <?php
                 // Generar los próximos 5 años (desde el año actual hacia adelante)
                 for ($i = date('Y'); $i <= date('Y') + 5; $i++) {
-                    echo '<option value="' . $i . '">' . $i . '</option>';
+                  echo '<option value="' . $i . '">' . $i . '</option>';
                 }
                 ?>
               </select>
@@ -161,11 +162,11 @@ MODAL AGREGAR MENSUALIDAD
         </div>
 
         <?php
-          // Llamada al controlador para agregar una nueva mensualidad
-          if (isset($_POST['nuevoMes'])) {
-              $crearMensualidad = new ControladorMensualidades();
-              $crearMensualidad->ctrCrearMensualidad();
-          }
+        // Llamada al controlador para agregar una nueva mensualidad
+        if (isset($_POST['nuevoMes'])) {
+          $crearMensualidad = new ControladorMensualidades();
+          $crearMensualidad->ctrCrearMensualidad();
+        }
         ?>
       </form>
     </div>
@@ -191,7 +192,7 @@ MODAL EDITAR MENSUALIDAD
 
         <!-- Cuerpo del modal -->
         <div class="modal-body">
-          
+
           <!-- Campo oculto para ID de la mensualidad -->
           <input type="hidden" id="idMensualidad" name="idMensualidad">
 
@@ -202,19 +203,19 @@ MODAL EDITAR MENSUALIDAD
                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
               </div>
               <select class="form-control" id="editarMes" name="editarMes" required>
-                <option value="">Seleccionar mes</option>
-                <option value="Enero">Enero</option>
-                <option value="Febrero">Febrero</option>
-                <option value="Marzo">Marzo</option>
-                <option value="Abril">Abril</option>
-                <option value="Mayo">Mayo</option>
-                <option value="Junio">Junio</option>
-                <option value="Julio">Julio</option>
-                <option value="Agosto">Agosto</option>
-                <option value="Septiembre">Septiembre</option>
-                <option value="Octubre">Octubre</option>
-                <option value="Noviembre">Noviembre</option>
-                <option value="Diciembre">Diciembre</option>
+              <option value="">Seleccionar mes</option>
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
               </select>
               <div class="invalid-feedback"></div> <!-- Mensaje de error -->
             </div>
@@ -231,7 +232,7 @@ MODAL EDITAR MENSUALIDAD
                 <?php
                 // Generar los próximos 5 años (desde el año actual hacia adelante)
                 for ($i = date('Y'); $i <= date('Y') + 5; $i++) {
-                    echo '<option value="' . $i . '">' . $i . '</option>';
+                  echo '<option value="' . $i . '">' . $i . '</option>';
                 }
                 ?>
               </select>
@@ -259,11 +260,11 @@ MODAL EDITAR MENSUALIDAD
         </div>
 
         <?php
-          // Llamada al controlador para editar la mensualidad
-          if (isset($_POST['editarMes'])) {
-              $editarMensualidad = new ControladorMensualidades();
-              $editarMensualidad->ctrEditarMensualidad();
-          }
+        // Llamada al controlador para editar la mensualidad
+        if (isset($_POST['editarMes'])) {
+          $editarMensualidad = new ControladorMensualidades();
+          $editarMensualidad->ctrEditarMensualidad();
+        }
         ?>
       </form>
     </div>
@@ -271,6 +272,6 @@ MODAL EDITAR MENSUALIDAD
 </div>
 
 <?php
-  $borrarMensualidad = new ControladorMensualidades();
-  $borrarMensualidad -> ctrBorrarMensualidad();
+$borrarMensualidad = new ControladorMensualidades();
+$borrarMensualidad->ctrBorrarMensualidad();
 ?>

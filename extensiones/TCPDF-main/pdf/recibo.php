@@ -14,7 +14,7 @@ class ImprimirRecibo {
     $itemPago = "id";
     $valorPago = $this->id_pago;
 
-    $respuestaPago = ControladorPagoMensualidades::ctrMostrarPagosMensualidadesImprimir($itemPago, $valorPago);
+    $respuestaPago = "hola";
 
     if (!$respuestaPago) {
       die('No se encontró el pago solicitado.');
