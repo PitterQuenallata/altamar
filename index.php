@@ -18,6 +18,7 @@ require_once "modelos/mensualidades.modelo.php";
 require_once "modelos/areas_sociales.modelo.php";
 require_once "modelos/pago_mensualidades.modelo.php";
 require_once "modelos/reservasAreaSocial.modelo.php";
+require_once "modelos/reportes.modelo.php";
 
 // require_once "modelos/entrada.modelo.php";
 // require_once "modelos/alquiler.modelo.php";

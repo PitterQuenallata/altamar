@@ -52,48 +52,95 @@
                   <td>1</td>
                   <td>Listar todos los propietarios con sus datos de contacto</td>
                   <td>Ninguno</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
+                  <td><button class="btn btn-success btn-sm btnR1">Generar</button></td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>Lista de propietarios que tienen deudas pendientes hasta la fecha</td>
                   <td>Ninguno</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
+                  <td><button class="btn btn-success btn-sm btnR2">Generar</button></td>
                 </tr>
+
                 <tr>
                   <td>3</td>
                   <td>Resumen de pagos de mensualidades por propietario</td>
-                  <td>ID del propietario</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
+                  <td>
+                    <div class="form-group">
+                      <!-- Selección del propietario -->
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                        <select class="form-control input-lg" name="idPropietario" required>
+                          <option value="">Seleccionar propietario</option>
+                          <?php
+                          $propietarios = ControladorPropietarios::ctrMostrarPropietarios(null, null);
+                          foreach ($propietarios as $propietario) {
+                            echo '<option value="' . $propietario["id"] . '" data-fecha="' . $propietario["fecha"] . '">'
+                              . mb_strtoupper($propietario["nombre"], 'UTF-8') . ' '
+                              . mb_strtoupper($propietario["apellido_paterno"], 'UTF-8') . ' '
+                              . mb_strtoupper($propietario["apellido_materno"], 'UTF-8')
+                              . '</option>';
+                          }
+                          ?>
+                        </select>
+
+                      </div>
+                    </div>
+                  </td>
+                  <td><button class="btn btn-success btn-sm btnR3">Generar</button></td>
                 </tr>
 
                 <!-- Reportes de alquileres y áreas sociales -->
                 <tr class="table-primary">
                   <td colspan="4" class="text-left font-weight-bold">-- Reportes de Alquileres y Áreas Sociales</td>
                 </tr>
+
                 <tr>
                   <td>4</td>
-                  <td>Lista de alquileres realizados con detalles</td>
-                  <td>Rango de fechas</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
+                  <td>Reporte de Alquileres con Detalles de Áreas Sociales</td>
+                  <td id="rangoFechaReporte4">Rango de fechas</td>
+                  <td><button class="btn btn-success btn-sm btnR4">Generar</button></td>
                 </tr>
-                <tr>
+
+                <!-- <tr>
                   <td>5</td>
                   <td>Disponibilidad de áreas sociales en un rango de fecha</td>
                   <td>Rango de fechas</td>
                   <td><button class="btn btn-success btn-sm">Generar</button></td>
+                </tr> -->
+                <tr>
+                  <td>5</td>
+                  <td>Listado de alquileres por propietario</td>
+                  <td> <div class="form-group">
+                      <!-- Selección del propietario -->
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                        <select class="form-control input-lg" name="idPropietarioR5" required>
+                          <option value="">Seleccionar propietario</option>
+                          <?php
+                          $propietarios = ControladorPropietarios::ctrMostrarPropietarios(null, null);
+                          foreach ($propietarios as $propietario) {
+                            echo '<option value="' . $propietario["id"] . '" data-fecha="' . $propietario["fecha"] . '">'
+                              . mb_strtoupper($propietario["nombre"], 'UTF-8') . ' '
+                              . mb_strtoupper($propietario["apellido_paterno"], 'UTF-8') . ' '
+                              . mb_strtoupper($propietario["apellido_materno"], 'UTF-8')
+                              . '</option>';
+                          }
+                          ?>
+                        </select>
+
+                      </div>
+                    </div></td>
+                  <td><button class="btn btn-success btn-sm btnR5">Generar</button></td>
                 </tr>
                 <tr>
                   <td>6</td>
-                  <td>Listado de alquileres por propietario</td>
-                  <td>ID del propietario</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>Área social más alquilada</td>
+                  <td>Reporte de las 10 Áreas Sociales Más Alquiladas</td>
                   <td>Ninguno</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
+                  <td><button class="btn btn-success btn-sm btnR6">Generar</button></td>
                 </tr>
 
                 <!-- Reportes financieros -->
@@ -101,28 +148,28 @@
                   <td colspan="4" class="text-left font-weight-bold">-- Reportes Financieros</td>
                 </tr>
                 <tr>
+                  <td>7</td>
+                  <td>Total de ingresos de alquiler en un rango de fechas</td>
+                  <td id="rangoFechaReporte7">Rango de fechas</td>
+                  <td><button class="btn btn-success btn-sm btnR7">Generar</button></td>
+                </tr>
+                <tr>
                   <td>8</td>
-                  <td>Total de ingresos por alquiler en un rango de fechas</td>
-                  <td>Rango de fechas</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
+                  <td>Total de ganancias hasta la fecha de alquileres</td>
+                  <td>Ninguno</td>
+                  <td><button class="btn btn-success btn-sm btnR8">Generar</button></td>
                 </tr>
                 <tr>
                   <td>9</td>
-                  <td>Total de ganancias hasta la fecha de alquileres</td>
+                  <td>Total de ganancias hasta la fecha de mensualidades</td>
                   <td>Ninguno</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
+                  <td><button class="btn btn-success btn-sm btnR9">Generar</button></td>
                 </tr>
                 <tr>
                   <td>10</td>
-                  <td>Total de ganancias hasta la fecha de mensualidades</td>
-                  <td>Ninguno</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
-                </tr>
-                <tr>
-                  <td>11</td>
                   <td>Total de ganancias generales</td>
                   <td>Ninguno</td>
-                  <td><button class="btn btn-success btn-sm">Generar</button></td>
+                  <td><button class="btn btn-success btn-sm btnR10">Generar</button></td>
                 </tr>
               </tbody>
             </table>
@@ -132,19 +179,3 @@
     </div>
   </section>
 </div>
-
-<script>
-  // JavaScript para capturar el rango de fechas y mostrarlo
-  $(document).ready(function() {
-    $('#aplicarRango').on('click', function() {
-      const fechaInicio = $('#fechaInicio').val();
-      const fechaFinal = $('#fechaFinal').val();
-      
-      if (fechaInicio && fechaFinal) {
-        $('#rangoSeleccionado span').text(fechaInicio + ' a ' + fechaFinal);
-      } else {
-        alert('Por favor seleccione un rango de fechas completo.');
-      }
-    });
-  });
-</script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2024 a las 16:02:21
+-- Tiempo de generación: 29-10-2024 a las 09:58:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -51,7 +51,8 @@ INSERT INTO `alquiler` (`id`, `fecha_inicio`, `fecha_final`, `hora_inicio`, `hor
 (8, '2024-10-25', '2024-10-25', '03:18:00', '15:18:00', 50.00, 63, 1),
 (9, '2024-10-25', '2024-10-25', '15:58:00', '18:01:00', 60.00, 63, 1),
 (10, '2024-10-25', '2024-10-25', '04:04:00', '16:04:00', 40.00, 63, 1),
-(11, '2024-10-26', '2024-10-26', '04:07:00', '16:07:00', 200.00, 63, 1);
+(11, '2024-10-26', '2024-10-26', '04:07:00', '16:07:00', 200.00, 63, 1),
+(12, '2024-10-29', '2024-10-31', '04:56:00', '16:57:00', 680.00, 63, 1);
 
 -- --------------------------------------------------------
 
@@ -156,7 +157,10 @@ INSERT INTO `detalle_alquiler` (`id_alquiler`, `id_area_social`, `costo`) VALUES
 (9, 10, 30.00),
 (10, 9, 40.00),
 (11, 4, 80.00),
-(11, 5, 120.00);
+(11, 5, 120.00),
+(12, 1, 500.00),
+(12, 3, 100.00),
+(12, 4, 80.00);
 
 -- --------------------------------------------------------
 
@@ -249,6 +253,7 @@ CREATE TABLE `propietario` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(250) NOT NULL,
   `nroDpto` varchar(10) NOT NULL,
+  `estado` tinyint(4) NOT NULL DEFAULT 1,
   `fecha` date DEFAULT current_timestamp(),
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -257,9 +262,9 @@ CREATE TABLE `propietario` (
 -- Volcado de datos para la tabla `propietario`
 --
 
-INSERT INTO `propietario` (`id`, `nombre`, `apellido_paterno`, `apellido_materno`, `nroCarnet`, `telefono`, `correo`, `nroDpto`, `fecha`, `id_usuario`) VALUES
-(51, 'juan', 'pérez', 'garcía', '20000000', '67033811', 'juan.perez@example.com', 'A101', '2024-02-01', 1),
-(63, 'juan enrique', 'jeke', 'astian', '123441', '70984905', 'al@gmail.com', 'a205', '2024-07-01', 1);
+INSERT INTO `propietario` (`id`, `nombre`, `apellido_paterno`, `apellido_materno`, `nroCarnet`, `telefono`, `correo`, `nroDpto`, `estado`, `fecha`, `id_usuario`) VALUES
+(51, 'juan', 'pérez', 'garcía', '20000000', '67033811', 'juan.perez@example.com', 'A101', 1, '2024-02-01', 1),
+(63, 'juan enrique', 'jeke', 'astian', '123441', '70984905', 'al@gmail.com', 'a205', 1, '2024-07-01', 1);
 
 -- --------------------------------------------------------
 
@@ -286,7 +291,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido_paterno`, `apellido_materno`, `usuario`, `password`, `telefono`, `correo`, `rol`, `estado`, `ultimo_login`) VALUES
-(1, 'juan', 'perez', 'mamani', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', '71234567', 'juan.perez@example.com', 'administrador', 1, '2024-10-24 14:10:36'),
+(1, 'juan', 'perez', 'mamani', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', '71234567', 'juan.perez@example.com', 'administrador', 1, '2024-10-29 00:12:13'),
 (52, 'carlos', 'ramirez', 'chquimia', 'fchiquimia', '$2a$07$asxx54ahjppf45sd87a5auHGHfBfKUcMRHMdLSNaVFyWh6MmTFrDG', '70984905', 'al@gmail.com', 'guardia', 1, NULL);
 
 --
@@ -350,7 +355,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `area_social`

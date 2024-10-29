@@ -159,6 +159,7 @@ session_start();
 <script src="vistas/js/validacionFechaHora.js"></script>
 <script src="vistas/js/reservaAreaSocial.js"></script>
 <script src="vistas/js/listaReservas.js"></script>
+<script src="vistas/js/reportes.js"></script>
 
 <script src="vistas/plugins/select2/js/select2.full.min.js"></script>
 
